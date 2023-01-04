@@ -7,9 +7,9 @@ import PasswordReset from "./components/PasswordReset";
 import ForgotPassword from "./components/ForgotPassword";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 import { useEffect, useContext, useState } from "react";
-import { LoginContext } from "./components/ContextProvider/Context";
+import Context, { LoginContext } from "./components/ContextProvider/Context";
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
   const { logindata, setLoginData } = useContext(LoginContext);
 
 
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
   const DashboardValid = async () => {
     let token = localStorage.getItem("usersdatatoken");
@@ -33,13 +33,13 @@ function App() {
     });
 
     const data = await res.json();
-
+    // console.log(data)
     if (data.status === 401 || !data) {
       console.log("user not valid");
     } else {
       console.log("user verify");
       setLoginData(data)
-      Navigate("/dash");
+      // Navigate("/dash");
     }
   }
 
@@ -53,28 +53,28 @@ function App() {
 
   return (
     <>
-      {
-        data ? (
-          <>
-            <Header />
+      {/* {
+        data ? ( */}
 
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dash" element={<Dashboard />} />
-              <Route path="/password-reset" element={<PasswordReset />} />
-              <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </>
+      <BrowserRouter>
+        <Context>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dash" element={<Dashboard />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </Context>
+      </BrowserRouter>
 
-        ) : <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center", height: "100vh" }}>
-          Loading... &nbsp;
+       {/* ) : <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        Loading... &nbsp;
           <CircularProgress />
-        </Box>
-      }
-
-
+         </Box>
+       }  */}
     </>
   );
 }

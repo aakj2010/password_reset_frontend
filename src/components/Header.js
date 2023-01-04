@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import "./header.css"
 import { LoginContext } from './ContextProvider/Context';
@@ -9,10 +9,11 @@ import { useNavigate , NavLink } from "react-router-dom"
 const Header = () => {
 
     const { logindata, setLoginData } = useContext(LoginContext);
+    // console.log(logindata)
 
     const Navigate = useNavigate();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -23,7 +24,9 @@ const Header = () => {
 
 
     const logoutuser = async () => {
-        let token = localStorage.getItem("usersdatatoken");
+
+        let token = localStorage.getItem("usersdatatoken")
+        console.log(token);
 
         const res = await fetch("/logout", {
             method: "GET",
@@ -92,12 +95,12 @@ const Header = () => {
                                     }}>Logout</MenuItem>
                                 </>
                             ) : (
-                                <>
+                               
                                     <MenuItem onClick={() => {
                                         goError()
                                         handleClose()
                                     }}>Profile</MenuItem>
-                                </>
+                                
                             )
                         }
 
