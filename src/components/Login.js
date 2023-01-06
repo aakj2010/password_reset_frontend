@@ -103,7 +103,7 @@ const Login = () => {
 
                         <button className='btn' onClick={loginuser}>Login</button>
                         <p>Don't have an Account? <NavLink to="/register">Sign Up</NavLink> </p>
-                        <p style={{color:"black",fontWeight:"bold"}}>Forgot Password  <NavLink to="/password-reset">Click Here</NavLink> </p>
+                        <p style={{color:"black",fontWeight:"bold"}}>Forgot Password <NavLink to="/password-reset">Click Here</NavLink> </p>
                     </form>
                     <ToastContainer />
                 </div>
