@@ -71,7 +71,7 @@ const Register = () => {
             // console.log("user registration succesfully done");
 
 
-            const data = await fetch("/register", {
+            const data = await fetch("https://password-reset-backend-eight.vercel.app/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
